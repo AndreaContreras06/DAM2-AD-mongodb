@@ -84,4 +84,40 @@ Realiza estos ejercicios sobre una colección de prácticas.
 51. Modifica la nota de una valoración concreta dentro del array.
 52. Incrementa en una unidad las notas de todas las valoraciones de un producto de prueba, sin superar el valor máximo permitido que hayas establecido.
 
+## Bloque 7. Agregaciones (8 ejercicios)
+53. Calcula el número de productos, el precio medio y el stock total de cada categoría.
+54. Obtén el precio máximo y mínimo de cada categoría.
+55. Calcula el margen de beneficio de cada producto (precio - coste).
+56. Calcula el valor total del inventario por categoría (precio × stock).
+57. Ordena las categorías según su precio medio, de mayor a menor.
+58. Obtén una lista de los nombres de los productos agrupados por categoría.
+59. Descubre qué etiquetas son las más utilizadas.
+60. Genera un informe que incluya, en una única consulta:
+- El número total de productos.
+- Las estadísticas de productos por categoría.
+- La cantidad de productos en los intervalos de precio 0–50 €, 50–200 € y 200 € o más.
 
+## Bloque 8. Relaciones entre colecciones (4 ejercicios)
+61. Muestra cada pedido junto con los datos del cliente que lo realizó.
+62. Obtén todos los pedidos de Ana, mostrando también la información del cliente.
+63. Muestra cada línea de pedido junto con el nombre del producto, su precio, la cantidad solicitada y el importe total de esa línea (precio × cantidad).
+64. Obtén los cinco clientes que más dinero han gastado en pedidos no cancelados, mostrando su nombre y el importe total gastado.
+
+## Bloque 9. Índices y rendimiento (3 ejercicios)
+65. Consulta los índices existentes en productos. Ejecuta una búsqueda por categoría y examina su plan de ejecución utilizando explain("executionStats").
+66. Crea un índice compuesto sobre categoria y precio. Ejecuta una consulta que filtre por categoría y ordene por precio. Compara el plan de ejecución antes y después de crear el índice.
+67. Crea un índice único sobre codigo e intenta insertar un producto con un código duplicado. Explica qué ocurre.
+
+## Bloque 10. Validación de documentos (3 ejercicios)
+68. Crea una colección usuarios con las siguientes reglas de validación:
+- nombre: obligatorio y de tipo texto.
+- email: obligatorio y de tipo texto.
+- edad: número entre 0 y 120.
+- rol: únicamente puede ser alumno o profesor.
+69. Comprueba las reglas de validación:
+- Intenta insertar un usuario sin email.
+- Intenta insertar un usuario con edad fuera del intervalo permitido.
+- Intenta insertar un usuario con un rol no permitido.
+- Inserta un usuario válido.
+- Comprueba qué operaciones se han realizado correctamente y cuáles han fallado.
+70. Modifica la validación mediante collMod para añadir el campo obligatorio activo de tipo booleano. Comprueba que la nueva restricción funciona.

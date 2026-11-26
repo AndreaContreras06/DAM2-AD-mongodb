@@ -157,3 +157,91 @@
 // 52. Incrementa en una unidad las notas de todas
 // las valoraciones de un producto de prueba,
 // sin superar el valor máximo permitido.
+
+// BLOQUE 7. AGREGACIONES
+// ============================================================
+
+// 53. Calcula el número de productos, el precio medio
+// y el stock total de cada categoría.
+
+// 54. Obtén el precio máximo y mínimo de cada categoría.
+
+// 55. Calcula el margen de beneficio de cada producto
+// (precio - coste).
+
+// 56. Calcula el valor total del inventario por categoría
+// (precio × stock).
+
+// 57. Ordena las categorías según su precio medio,
+// de mayor a menor.
+
+// 58. Obtén una lista de los nombres de los productos
+// agrupados por categoría.
+
+// 59. Descubre qué etiquetas son las más utilizadas.
+
+// 60. Genera un informe que incluya, en una única consulta:
+// - El número total de productos.
+// - Las estadísticas de productos por categoría.
+// - La cantidad de productos en los intervalos de precio:
+//   0-50 €, 50-200 € y 200 € o más.
+
+// BLOQUE 8. RELACIONES ENTRE COLECCIONES
+// ============================================================
+
+// 61. Muestra cada pedido junto con los datos
+// del cliente que lo realizó.
+
+// 62. Obtén todos los pedidos de Ana,
+// mostrando también la información del cliente.
+
+// 63. Muestra cada línea de pedido junto con:
+// - El nombre del producto.
+// - Su precio.
+// - La cantidad solicitada.
+// - El importe total de esa línea (precio × cantidad).
+
+// 64. Obtén los cinco clientes que más dinero han gastado
+// en pedidos no cancelados, mostrando su nombre
+// y el importe total gastado.
+
+// BLOQUE 9. ÍNDICES Y RENDIMIENTO
+// ============================================================
+
+// 65. Consulta los índices existentes en `productos`.
+// Ejecuta una búsqueda por categoría y examina
+// su plan de ejecución con explain("executionStats").
+
+// 66. Crea un índice compuesto sobre `categoria` y `precio`.
+// Ejecuta una consulta que filtre por categoría
+// y ordene por precio.
+// Compara el plan de ejecución antes y después
+// de crear el índice.
+
+// 67. Crea un índice único sobre `codigo` e intenta
+// insertar un producto con un código duplicado.
+// Explica qué ocurre.
+
+// BLOQUE 10. VALIDACIÓN DE DOCUMENTOS
+// ============================================================
+
+// 68. Crea una colección `usuarios` con estas reglas:
+// - nombre: obligatorio y de tipo texto.
+// - email: obligatorio y de tipo texto.
+// - edad: número entre 0 y 120.
+// - rol: únicamente `alumno` o `profesor`.
+
+// 69. Comprueba las reglas de validación:
+// - Intenta insertar un usuario sin email.
+// - Intenta insertar un usuario con edad fuera del intervalo.
+// - Intenta insertar un usuario con un rol no permitido.
+// - Inserta un usuario válido.
+// - Comprueba qué operaciones funcionan y cuáles fallan.
+
+// 70. Modifica la validación mediante collMod para añadir
+// el campo obligatorio `activo` de tipo booleano.
+// Comprueba que la nueva restricción funciona.
+
+// ============================================================
+// FIN DE LA PRÁCTICA - 70 EJERCICIOS
+// ============================================================
