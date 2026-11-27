@@ -194,31 +194,171 @@ db.productos.find()
 // ============================================================
 // IMPORTANTE: trabaja sobre una colección de prácticas.
 
-// 27. Inserta un producto nuevo con código, nombre, categoría,
-// precio, coste, stock y etiquetas.
+// 27. Inserta un producto nuevo con código, nombre, categoría, precio, coste, stock y etiquetas.
+
+db.productos.insertOne({
+    codigo: "P070",
+    nombre: "Teclado mecánico",
+    categoria: "Informática",
+    precio: 75,
+    coste: 40,
+    stock: 25,
+    etiquetas: ["teclado", "gaming", "periféricos"]
+})
 
 // 28. Inserta cinco productos adicionales en una única operación.
 
+db.productos.insertMany([
+    {
+        codigo: "P012",
+        nombre: "Ratón inalámbrico",
+        categoria: "Informática",
+        precio: 25,
+        coste: 12,
+        stock: 50,
+        etiquetas: ["ratón", "inalámbrico", "periféricos"]
+    },
+    {
+        codigo: "P013",
+        nombre: "Monitor 24 pulgadas",
+        categoria: "Informática",
+        precio: 150,
+        coste: 100,
+        stock: 20,
+        etiquetas: ["monitor", "pantalla"]
+    },
+    {
+        codigo: "P014",
+        nombre: "Auriculares Bluetooth",
+        categoria: "Audio",
+        precio: 45,
+        coste: 20,
+        stock: 35,
+        etiquetas: ["auriculares", "bluetooth", "audio"]
+    },
+    {
+        codigo: "P015",
+        nombre: "Teclado inalámbrico",
+        categoria: "Informática",
+        precio: 35,
+        coste: 18,
+        stock: 40,
+        etiquetas: ["teclado", "inalámbrico"]
+    },
+    {
+        codigo: "P016",
+        nombre: "Altavoz portátil",
+        categoria: "Audio",
+        precio: 60,
+        coste: 30,
+        stock: 15,
+        etiquetas: ["altavoz", "bluetooth", "portátil"]
+    }
+])
+
+// Comprueba que se han insertado correctamente.
+db.productos.find({
+    codigo: { $in: ["P012", "P013", "P014", "P015", "P016"] }
+})
+
 // 29. Cambia el precio de uno de los productos insertados.
+
+db.productos.updateOne(
+    { codigo: "P072" },
+    {
+        $set: {
+            precio: 50
+        }
+    }
+)
 
 // 30. Incrementa en 20 unidades su stock.
 
-// 31. Reduce el precio de todos los productos de una categoría
-// multiplicándolo por 0.9.
+db.productos.updateOne(
+    { codigo: "P072" },
+    {
+        $inc: {
+            stock: 20
+        }
+    }
+)
 
-// 32. Añade un campo `activo` con valor true
-// a todos los productos.
+// 31. Reduce el precio de todos los productos de una categoría multiplicándolo por 0.9.
+
+db.productos.updateMany(
+    { categoria: "Informática" },
+    {
+        $mul: {
+            precio: 0.9
+        }
+    }
+)
+
+// 32. Añade un campo `activo` con valor true a todos los productos.
+
+db.productos.updateMany(
+    {},
+    {
+        $set: {
+            activo: true
+        }
+    }
+)
+
+// Comprueba que se ha añadido correctamente.
+db.productos.find({ activo: true })
 
 // 33. Cambia el nombre del campo `activo` por `disponible`.
 
+db.productos.updateMany(
+    {},
+    {
+        $rename: {
+            activo: "disponible"
+        }
+    }
+)
+
 // 34. Elimina el campo `disponible` de un producto.
 
-// 35. Realiza una operación upsert sobre un producto
-// con código `P999`.
-// Si existe, actualízalo; si no, insértalo.
+db.productos.updateOne(
+    { codigo: "P072" },
+    {
+        $unset: {
+            disponible: ""
+        }
+    }
+)
 
-// 36. Sustituye completamente uno de los documentos de prueba,
-// conservando su _id.
+// 35. Realiza una operación upsert sobre un producto con código `P999`. Si existe, actualízalo; si no, insértalo.
+
+db.productos.updateOne(
+    { codigo: "P999" },
+    {
+        $set: {
+            codigo: "P999"
+        }
+    },
+    {
+        upsert: true
+    }
+)
+
+// 36. Sustituye completamente uno de los documentos de prueba, conservando su _id.
+
+db.productos.replaceOne(
+    { codigo: "P999" },
+    {
+        _id: ObjectId("ID_DEL_DOCUMENTO"),
+        codigo: "P999",
+        nombre: "Producto actualizado",
+        precio: 25,
+        activo: true
+    }
+)
+
+// Comprueba que se ha sustituido correctamente.
+db.productos.findOne({ codigo: "P999" })
 
 // BLOQUE 5. ELIMINACIÓN
 // ============================================================
