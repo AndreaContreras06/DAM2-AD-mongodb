@@ -128,23 +128,67 @@ db.productos.find({
 
 // 19. Encuentra los productos que tienen el campo `descuento`.
 
+db.productos.find({
+    descuento: { $exists: true }
+})
+
 // 20. Busca los productos que no tienen descuento definido.
 
-// 21. Comprueba qué productos tienen el precio almacenado
-// como número.
+db.productos.find({
+    descuento: { $exists: false }
+})
 
-// 22. Encuentra los productos cuyo precio de venta
-// sea superior a su coste.
+// 21. Comprueba qué productos tienen el precio almacenado como número.
+
+db.productos.find({
+    precio: { $type: "number" }
+})
+
+// 22. Encuentra los productos cuyo precio de venta sea superior a su coste.
+
+db.productos.find({
+    $expr: { $gt: ["$precio", "$coste"] }
+})
 
 // 23. Ordena los productos del más barato al más caro.
 
+db.productos.find().sort({
+    precio: 1
+})
+
 // 24. Obtén los tres productos más caros.
+
+db.productos.find().sort({
+    precio: -1
+}).limit(3)
 
 // 25. Muestra los tres productos más baratos que tengan stock.
 
-// 26. Implementa una paginación que muestre tres productos
-// por página, ordenados por _id.
-// Obtén las páginas 1, 2 y 3.
+db.productos.find({
+    stock: { $gt: 0 }
+}).sort({
+    precio: 1
+}).limit(3)
+
+// 26. Implementa una paginación que muestre tres productos por página, ordenados por _id. Obtén las páginas 1, 2 y 3.
+
+// Página 1
+db.productos.find()
+    .sort({ _id: 1 })
+    .skip(0)
+    .limit(3)
+
+// Página 2
+db.productos.find()
+    .sort({ _id: 1 })
+    .skip(3)
+    .limit(3)
+
+// Página 3
+db.productos.find()
+    .sort({ _id: 1 })
+    .skip(6)
+    .limit(3)
 
 // BLOQUE 4. INSERCIÓN Y ACTUALIZACIÓN
 // ============================================================
