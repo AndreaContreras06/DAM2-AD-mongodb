@@ -50,29 +50,78 @@ db.productos.find({}, { nombre: 1, precio: 1, _id: 0 })
 
 // 9. Busca todos los productos de informática.
 
+db.productos.aggregate([
+    {
+        $lookup: { from: "categorias", localField: "categoriaId", foreignField: "_id", as: "categoria"}
+    },
+
+    {
+        $match: {
+            "categoria.nombre": "Informatica"
+        }
+    }
+])
 
 // 10. Encuentra los productos cuyo precio sea superior a 100 €.
 
+db.productos.find({
+    precio: { $gt: 100 }
+})
+
 // 11. Busca los productos que cuestan entre 50 € y 500 €,ambos incluidos.
+
+db.productos.find({
+    precio: {
+        $gte: 50,
+        $lte: 500
+    }
+})
 
 // 12. Localiza los productos que no tienen stock.
 
-// 13. Encuentra los productos con stock superior a 10 unidades
-// y precio inferior a 100 €.
+db.productos.find({
+    stock: { $eq: 0 }
+})
 
-// 14. Busca productos pertenecientes a las categorías
-// `audio` o `movil`.
+// 13. Encuentra los productos con stock superior a 10 unidades y precio inferior a 100 €.
 
-// 15. Encuentra los productos que no pertenecen
-// a la categoría `informatica`.
+db.productos.find({
+    stock: { $gt: 10 },
+    precio: { $lt: 100 }
+})
 
-// 16. Busca productos que cuesten menos de 30 € o tengan
-// más de 50 unidades en stock.
+// 14. Busca productos pertenecientes a las categorías `audio` o `movil`.
+
+db.productos.find({
+    categoria: { $in: ["audio", "movil"] }
+})
+
+// 15. Encuentra los productos que no pertenecen a la categoría `informatica`.
+
+db.productos.find({
+    categoria: { $ne: "informatica" }
+})
+
+// 16. Busca productos que cuesten menos de 30 € o tengan más de 50 unidades en stock.
+
+db.productos.find({
+    $or: [
+        { precio: { $lt: 30 } },
+        { stock: { $gt: 50 } }
+    ]
+})
 
 // 17. Encuentra productos cuyo precio no sea superior a 100 €.
 
-// 18. Localiza todos los productos cuyo nombre contenga
-// la palabra `móvil`, sin distinguir mayúsculas de minúsculas.
+db.productos.find({
+    precio: { $lte: 100 }
+})
+
+// 18. Localiza todos los productos cuyo nombre contenga la palabra `móvil`, sin distinguir mayúsculas de minúsculas.
+
+db.productos.find({
+    nombre: { $regex: /móvil/i }
+})
 
 // BLOQUE 3. CAMPOS, TIPOS Y ORDENACIÓN
 // ============================================================
